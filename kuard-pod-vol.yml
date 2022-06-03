@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: kuard
+  namespace: kuard
 spec:
   volumes:
     - name: "kuard-data"

@@ -2,11 +2,12 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: kuard
+  namespace: kuard
 spec:
   volumes:
     - name: "kuard-data"
-      server: my.nfs.server.local
-      path: "/exports"
+      hostPath:
+        path: "/var/lib/kuard"
   containers:
     - image: gcr.io/kuar-demo/kuard-amd64:blue
       name: kuard
@@ -15,12 +16,12 @@ spec:
           name: http
           protocol: TCP
       resources:
-        request:
+        requests:
           cpu: "500m"
           memory: "128Mi"
         limits:
           cpu: "1000m"
-          memory: "256mi"
+          memory: "256Mi"
       volumeMounts:
         - mountPath: "/data"
           name: "kuard-data"
